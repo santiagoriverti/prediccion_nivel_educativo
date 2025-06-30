@@ -1,0 +1,432 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel} % Para el idioma español
+\usepackage{graphicx} % Para insertar imágenes
+\usepackage[margin=2.5cm]{geometry} % Márgenes de 2.5 cm
+\usepackage{setspace} % Para el interlineado
+\usepackage{indentfirst} % Para la sangría en la primera línea de cada sección
+\usepackage{xcolor} % Para escribir texto en colores
+\usepackage{amsfonts}
+\usepackage{natbib} % Paquete para gestionar la bibliografía
+\usepackage{amsmath}
+\bibliographystyle{apalike} % Estilo de citas y referencias
+% Configuración del documento según normas APA
+\onehalfspacing % Interlineado 1.5
+\setlength{\parindent}{1.27cm} % Sangría de 1.27 cm
+\setlength{\parskip}{0cm} % Sin espacio entre párrafos
+\setlength{\headheight}{0cm} % Sin encabezado adicional
+\setlength{\footskip}{1.27cm} % Espacio para el pie de página
+\usepackage{fancyhdr} % Para personalizar encabezados y pies de página
+\fancyhf{} % Limpia encabezados y pies
+\rhead{} % Encabezado derecho vacío
+\lhead{} % Encabezado izquierdo vacío
+\cfoot{\thepage} % Número de página centrado en el pie
+% Configuración de la fuente Times New Roman
+\usepackage{times} % Usa la fuente Times New Roman
+% Justificación del texto
+\usepackage{ragged2e}
+\justifying % Texto justificado
+\usepackage{url}
+\usepackage{tabularx}
+\usepackage{float} % Para usar [H] en las tablas
+\usepackage{colortbl}
+\usepackage[table]{xcolor}
+\usepackage[colorlinks=true,linkcolor=black,citecolor=black,urlcolor=blue]{hyperref}
+\usepackage{placeins} % Para usar \FloatBarrier
+
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{booktabs} % Para mejores reglas
+\arrayrulecolor{black} % Bordes negros
+\usepackage[titles]{tocloft}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+
+\begin{document}
+\doublespacing % Configura el interlineado a 1.5
+
+\tableofcontents
+\clearpage
+
+\section{Resumen} %(250 palabras)
+
+En el presente trabajo se pretende investigar el poder predictivo, sobre el nivel educativo en hogares, de modelos basados en aprendizaje automático, a partir de microdatos provenientes de la Encuesta Permanente de Hogares (EPH) entre 2003 y 2024. La investigación adopta un enfoque cuantitativo, no experimental, transversal y de carácter predictivo. Se pretende entrenar y evaluar el desempeño de distintos algoritmos de aprendizaje supervisado -bosques aleatorios, SVM y SVR- con selección de variables a través del método de red elástica, para la predicción de indicadores educativos a partir de variables socioeconómicas y demográficas. En base de la generación y evaluación de modelos, se pretende encontrar aquel que permita predecir, con el menor error posible, el nivel educativo de los hogares en Argentina.
+
+El proyecto se concentra en la educación dado que es un determinante clave del bienestar individual y colectivo. En consecuencia, comprender sus causas y distribución es fundamental para disminuir la desigualdad educativa. Para ello, el aprendizaje automático brinda herramientas prometedoras basadas en el hallazgo de patrones complejos.
+
+El objetivo general consiste en desarrollar y evaluar modelos predictivos basados en aprendizaje automático que sean capaces de predecir el nivel educativo en los hogares de Argentina —a partir de la construcción de una métrica homogénea y normalizada—, durante el periodo 2003-2024, sobre la base de variables socioeconómicas y demográficas de la población; con el fin de identificar factores estructurales que expliquen la desigualdad educativa y orienten el diseño de políticas públicas.
+
+El valor agregado del trabajo reside en integrar el enfoque clásico con herramientas contemporáneas, que permiten capturar heterogeneidad y no linealidades, junto con el uso de métricas innovadoras, para lo cual se construyen indicadores del nivel educativo a nivel hogar ajustado por edad y etapa educativa. Esto permite integrar la dinámica familiar dentro de la evaluación.
+
+Estas métricas resultan innovadoras en tanto permiten capturar el déficit educativo estructural en los hogares y, a diferencia de aquellas que se centran en el nivel educativo máximo alcanzado o en el promedio de años de escolaridad, permiten ajustar por edad esperada de escolarización en cada etapa educativa. Esto posibilita una comparación más equitativa entre hogares con diferentes composiciones etarias e identificar situaciones de déficit educativo de forma más precisa. De este modo, no solo mejora la calidad de la predicción sino la capacidad de focalización de políticas públicas.
+
+\section{Justificación} %(Una pagina)
+
+Las estimaciones empíricas sobre las distintas especificaciones de los retornos a la educación, para diferentes periodos y regiones, han demostrado que el nivel educativo es una variable fundamental para el desarrollo económico.
+
+La educación es un determinante estructural del bienestar. El Estado no puede simplemente “asignar” años de educación a aquellos individuos o familias que los necesiten. Por lo tanto, es necesario, para el diseño de políticas públicas, conocer como se constituye el nivel educativo para poder promover cambios significativos.
+
+Un aspecto clave de toda política pública, es poder identificar a sus beneficiarios correctamente para evitar una asignación ineficiente de recursos. El \textit{qué} y \textit{cómo} son tan importantes como el \textit{quién}. En este sentido, contar con modelos eficientes, que permitan identificar a los beneficiarios de una determinada política social, puede ser útil tanto para gobiernos como para ONGs.
+
+La propuesta consiste en, no solo desarrollar modelos de aprendizaje automático que puedan predecir el nivel educativo de los hogares, sino en identificar aquellos factores socioeconómicos y demográficos más determinantes en el nivel educativo. Esto es fundamental para que los hacedores de política puedan identificar las características o atributos de los grupos vulnerables en la sociedad. Por lo tanto, los resultados no son solo predictivos, sino que son interpretables y aplicables como herramientas concretas para mejorar el bienestar agregado.
+
+Considerar el nivel educativo del hogar y no del individuo, permite pensar y analizar las decisiones educativas como respuestas a una dinámica familiar. Esto posibilita poner el foco en los rezagos educativos estructurales en contextos de vulnerabilidad.
+
+\section{Planteamiento del tema} %(Una pagina)
+
+El presente proyecto está orientado a investigar el poder predictivo que tienen las variables socioeconómicas y demográficas, cuando se combinan mediante algoritmos de aprendizaje automático (respecto de los métodos econométricos tradicionales), para estimar el nivel de educación de los hogares en Argentina durante el periodo comprendido entre los años 2003 y 2024.
+
+Los resultados obtenidos pueden ser interpretados de forma tal de descomponer las predicciones y entender cuál es el aporte, de cada variable, al resultado final. La identificación de patrones que permitan focalizar adecuadamente las intervenciones, puede contribuir, como insumos para el diseño de políticas públicas, a facilitar las decisiones en cuanto a información y eficiencia.
+
+La disponibilidad de datos ofrecidos públicamente por la EPH y la posibilidad de utilizar herramientas de acceso publico de aprendizaje automático; aseguran la viabilidad técnica y empírica del trabajo.
+
+A partir del planteamiento del tema surgen las siguientes preguntas problematizantes: ¿Es posible predecir con precisión el nivel educativo de un hogar argentino a partir de sus características socioeconómicas y demográficas? ¿Qué algoritmos de aprendizaje automático ofrecen mejor desempeño para esta tarea? ¿Qué variables resultan más relevantes en la predicción del nivel educativo?
+
+\section{Objetivos} %(Media pagina)
+
+Objetivo general: desarrollar y evaluar modelos basados en aprendizaje automático que sean capaces de predecir el nivel educativo en los hogares de Argentina —a partir de la construcción de una métrica homogénea y normalizada—, durante el periodo 2003-2024, en función de variables socioeconómicas y demográficas de la población; con el fin de identificar factores estructurales que expliquen la desigualdad educativa y orienten el diseño de políticas públicas.
+
+\subsection{Objetivos específicos:}
+
+\begin{enumerate}
+    \item Definir y construir una métrica homogénea del nivel educativo ajustada por edad y composición del hogar.
+    \item Identificar los factores socioeconómicos y demográficos que explican el nivel educativo de los hogares argentinos.
+    \item Evaluar la capacidad de distintos algoritmos de aprendizaje automático para predecir el nivel educativo en diferentes contextos regionales y temporales.
+    \item Comparar el poder predictivo de técnicas de aprendizaje automático respecto de modelos econometricos tradicionales en términos de precisión, interpretabilidad y robustez.
+    \item Interpretar los resultados para proponer estrategias de focalizacion de políticas públicas.
+\end{enumerate}
+
+\section{Hipótesis} %(Media pagina)
+
+Las características socioeconómicas y demográficas de los hogares argentinos permiten predecir, con alta precisión, su nivel educativo mediante modelos de aprendizaje automático.
+
+\subsection{Subhipótesis}
+
+El uso de algoritmos de aprendizaje automático, junto con una métrica del nivel de educación por hogar, conlleva a una gran capacidad predictiva del nivel educativo de los hogares en Argentina a partir de variables socioeconómicas observables, lo cual permite comprender nuevas interrelaciones entre las variables.
+
+\section{Marco teórico} %(Cinco paginas)
+
+\subsection{Retornos a la educación}
+
+\subsubsection{Orígenes}
+
+La noción de que mayores niveles de bienestar son generados por individuos cada vez más educados, tiene raíces en los orígenes del pensamiento económico formal. Así es como \citet[p.~14]{smith1776} reconocía que “en toda nación, esa proporción [de la riqueza] depende de dos circunstancias distintas: primero, de la habilidad, destreza y juicio con que habitualmente se realiza el trabajo; y segundo, de la proporción entre el número de los que están empleados en un trabajo útil y los que no lo están”. En la misma linea, John Stuart Mill argumentaba que el gasto en educación es uno de los pocos que no debería estar vedado para el Estado; Nassau William Senior, vinculaba los avances civiles y educativos con la racionalidad económica; y, Thomas Robert Malthus sostenía que la producción y el mantenimiento de la riqueza, dependen principalmente de las mismas causas, combinadas con la instrucción moral y religiosa \citep{medema2004, malthus2024}. De forma complementaria, señalaba \citet[p.~185]{marshall1890}, que “la habilidad y la destreza industrial dependen cada vez más de amplias facultades como el juicio, la prontitud, el ingenio, el esmero y la constancia —facultades que no están especializadas en un solo oficio, pero que son útiles en muchos— y lo mismo ocurre con la capacidad empresarial” (\textit{traducción propia}).
+
+Sin embargo, el término moderno \textit{capital humano} surge formalmente con \cite{schultz1961}, quien recoge las ideas previas y sostiene que las habilidades y conocimientos adquiridos por los individuos son una forma de capital susceptible de inversión y causante de gran parte del desarrollo humano. \cite{schultz1961} argumenta que los trabajadores se convertirán, a través de la adquisición de conocimiento y habilidades, en capitalistas. Queda así inaugurada la posibilidad de pensar en la inversión en capital humano como un fenómeno propio del capitalismo.
+
+\cite{becker1964} profundiza este enfoque y da inicio al desarrollo de una rama de la literatura económica que considera, a la decisión de educarse, como un proyecto de inversión. Para ello, sostiene que el capital humano es análogo al físico y que, por lo tanto, estos pueden analizarse bajo enfoques similares. Para \cite{becker1964} es posible elevar el perfil de ingresos futuros de los individuos a través de la inversión en capital humano. Tal inversión tiene asociada así una tasa interna de retorno, que puede ser evaluada bajo los principios del análisis marginal.
+
+A partir de esta conceptualización, \cite{mincer1974} formaliza la relación entre años de educación, experiencia laboral e ingresos. Su aporte más relevante es la \textit{ecuación de Mincer}, que explica los ingresos como una función que depende de los años de educación y de la experiencia laboral. Esto es,
+
+\begin{equation}
+    \ln Y_s = \ln Y_0 + rs \tag{1}
+    \label{eq:1}
+\end{equation}
+
+\noindent donde $Y_s$ representa los ingresos hipotéticos que un individuo recibiría luego de completar su escolaridad; $Y_0$, el ingreso base; $r$, la tasa marginal de retorno por cada año adicional de educación; y, $s$, los años de escolaridad. Posteriormente, extiende este modelo para incorporar la inversión post-escolar:
+
+\begin{equation}
+    Y_{sij} = Y_{si} + \left( r \sum_{t=0}^{j-1} C_{ti} - C_{ji} \right) \tag{1.1}
+    \label{eq:1.1}
+\end{equation}
+
+\noindent donde \(Y_{sij}\) representa el ingreso del individuo \(i\) con educación \(s\) en el año \(j\) de experiencia laboral; \(C_{ti}\) y \(C_{ji}\), los costos pasados y actuales de inversión en capital humano; y, \(r\), la tasa de retorno de dicha inversión.
+
+\cite{mincer1974} halla que, cada año adicional de educación, esta asociado con un incremento de los ingresos entre 7\% y 10\%.
+
+Más allá de las limitaciones del modelo original, este sentó las bases de una serie de desarrollos teóricos y trabajos aplicados, que continúan hasta el día de hoy bajo el paradigma de los modelos mincerianos de retornos a la educación.
+
+\subsubsection{Estudios empíricos en Argentina}
+
+Los trabajos empíricos sobre retornos a la educación han proliferado a partir de \cite{mincer1974} en casi todos los países del mundo. Los avances teóricos en econometría y, la disponibilidad de fuentes de información, han permitido el desarrollo de distintas especificaciones de la ecuación de Mincer. Argentina no fue la excepción. Un primer enfoque es presentado por \cite{margot2001}, quien estima los retornos a la educación mediante un análisis basado en cohortes. Para ello, realiza un trabajo aplicado con el objetivo de hallar las tasas de retorno dinámicas para los distintos niveles educativos en Gran Buenos Aires y, compararlas con las tasas de retorno estáticas. Para ello utiliza la siguiente especificación para estimar la tasa interna de retorno de la educación,
+
+\begin{equation}
+    \sum_{t=0}^{E} \frac{-C_t}{(1 + r)^t} + \sum_{t=E+1}^{T} \frac{R_t^j - R_t^{j-1}}{(1 + r)^t} = 0 \tag{2}
+    \label{eq:2}
+\end{equation}
+
+\noindent donde \( C_t \) representa el costo de oportunidad en el año \( t \); \( R_t^j \), el ingreso acumulado con nivel educativo; \( j \) y, \( R_t^{j-1} \), el ingreso con un nivel educativo anterior. La ecuación se iguala a cero para obtener la tasa \( r \) que iguala el valor presente de los costos y beneficios educativos.
+
+El principal hallazgo consiste en evidenciar que las tasas de retorno estimadas mediante el modelo estático, son sistemáticamente más altas producto de asumir que los ingresos observados son —sin considerar cambios estructurales ni crisis económicas—, equivalentes entre los distintos grupos etarios. Esto provoca que los ingresos futuros de los individuos resulten sobrestimados y, por lo tanto, las tasas de retorno dinámicas resultan más apropiadas \citep{margot2001}.
+
+Estimar los retornos a la educación por mínimos cuadrados ordinarios (MCO), implica asumir que el efecto promedio de un año adicional sobre los ingresos, es homogéneo a través de los diferentes niveles de ingreso. Para ello, \cite{fiszbein2007} utilizan un enfoque de regresión por cuantiles, para estimar el efecto en los diferentes percentiles de la distribución salarial. A diferencia de MCO, esta técnica permite captar heterogeneidad, en los efectos del capital humano, a lo largo de la distribución del ingreso, bajo la siguiente especificación,
+
+\begin{equation}
+    \ln W_t = X_i \cdot \beta_\theta + u_{\theta i} \tag{3}
+    \label{eq:3}
+\end{equation}
+
+\noindent donde $X_i$ es el vector de variables exogenas; $\beta_\theta$, el vector de parámetros; $X_i \cdot \beta_\theta = (Quantile)_\theta (\ln w_i \mid X_i)$, el $\theta$-esimo cuantil condicional del logaritmo del salario, dado $X_i$, con $0<\theta<1$. El $\theta$-esimo cuantil es derivado resolviendo, mediante programación lineal, el siguiente problema: $\min_{\beta \in \mathbb{R}^k i} \sum \rho_\theta \left( \ln w_i - X_i \beta_\theta \right) \notag$.
+
+Como resultado de estimar la ecuación (\ref{eq:3}) \cite{fiszbein2007} hallan que los retornos a la educación se han incrementado año tras año durante el periodo 1992-2002 de 8,6\% a 11,4\%. Estos incrementos, se han mantenido aun bajo periodos de crisis económicas y de deterioro del salario real, acorde a lo expuesto por \cite{schultz1961}. A su vez, observan que en los cuantiles superiores, los hombres tienen retornos mayores respecto del los inferiores. En las mujeres, ocurre lo contrario. En consecuencia, mayores niveles de inversión en educación, conllevarían a mayor desigualdad. Tal desigualdad es provocada por variables en las que los individuos optan voluntariamente, consideradas de esfuerzo personal, como la educación, la migración y ocupación; o de aquellas circunstancias fuera del control individual tales como el género o el lugar de nacimiento \citep{golley2019}.
+
+La diversidad metodológica en las estimaciones produce resultados diferentes producto de aplicar enfoques diferentes. Cada metodología tiene asociada determinados sesgos. En este sentido, \citet[p.~12]{gomez2018} se propone “analizar empíricamente los retornos a la educación y los premios por calificación en asalariados ocupados de Argentina entre 2003 y 2014, bajo tres especificaciones alternativas de ecuaciones de Mincer”. \cite{gomez2018} considera el ingreso como una función del capital humano, la experiencia y características observables,
+
+\begin{equation}
+    \ln y_i = \vartheta \left(k_i, e_i, w_i \right) +\ln u_i \tag{4}
+    \label{eq:4}
+\end{equation}
+
+\noindent donde $y_i$ representa los ingresos laborales para el individuo $i$; $k_i$, su stock de capital humano medido en años de educación; $e_i$, su potencial experiencia laboral, aproximada por la edad; $w_i$, otros atributos observados del individuo; y $u_i$, el error aleatorio que captura características inobservables del individuo distribuidas normalmente.
+
+La especificación (\ref{eq:4}) es estimada por tres métodos: MCO, estimador pseudo-máxima verosimilitud de Poisson y MCO en dos etapas con corrección de sesgo por selección muestral según \cite{heckman1979}. La estimación por MCO ubica los retornos a la educación entre 3,9\% y 5,1\%, con tendencia decreciente desde 2006; Poisson, revela mayores retornos pero también decrecientes; mientras que el método de Heckman exhibe que MCO sobrestima los retornos. A su vez, se observa que las primas por calificación son crecientes entre operarios, pero decrecientes entre técnicos y profesionales \citep{gomez2018}.
+
+\cite{gomez2018} concluye que la metodología de Poisson es la más adecuada para estimar los retornos a la educación porque que permite capturar de mejor manera la evolución temporal y sus estimaciones son más consistentes, incluso bajo la presencia de heterocedasticidad. Respecto del modelo de \cite{heckman1979}, su aplicación se justifica únicamente si existen sospechas de sesgo de selección. Por último, \cite{gomez2018} destaca que las primas por calificación son menos sensibles al método de estimación, dado que las diferencias entre modelos no resultan estadísticamente significativas.
+
+\subsubsection{Otros estudios empíricos}
+
+La corrección de sesgo por selección muestral según \cite{heckman1979} aplicada en \cite{gomez2018} no es la más adecuada cuando se trabaja con pseudo-paneles. Dado que en estos casos, donde la selección ocurre a nivel de cohortes agregadas, los errores de medición o la falta de variabilidad intra-cohorte, pueden resultar problemáticos.
+
+Para controlar la heterogeneidad no observable entre cohortes y, en consecuencia, generar estimaciones más consistentes, \cite{mora2023} aplican el método generalizado de momentos corregido (GMMC). Este posibilita capturar efectos fijos de cohortes y, evitar así, los problemas que típicamente se hallan en los datos de corte transversal como la endogeneidad.
+
+Para Colombia, entre los años 2006 y 2020, la tasa promedio de retorno a la educación fue de 9,7\%. A pesar de ello, durante los últimos años y, a raíz del incremento de la oferta de mano de obra calificada, estas tasas han ido disminuyendo pero conservando una marcada brecha de género \citep{mora2023}.
+
+Dentro del enfoque de pseudo-paneles, \cite{himaz2016} estiman los retornos a la educación en Sri Lanka, con un enfoque similar al aplicado por \cite{margot2001} para Argentina. Sin embargo, mientras \cite{margot2001} estima la TIR enfocándose en cómo las crisis económicas y el ciclo vital alteran los ingresos proyectados; \cite{himaz2016} centran su enfoque, mediante uso de efectos fijos, en el impacto que variables no observadas (como la habilidad) tienen sobre la estimación de Mincer.
+
+No controlar por variables inobservables como habilidad y motivación, sesgan la estimación de la igualdad de Mincer por MCO en un 4\% para varones \citep{himaz2016}. Similar es la conclusión a la que llega \cite{kemelbayeva2020} a través de estimar los retornos a la educación en Kazakhstan. Sin embargo, este último explica tal diferencia en base a errores de especificación estructural.
+
+La estrategia adoptada por \cite{kemelbayeva2020} supone que los retornos a la educación son los mismos a través de los distintos niveles de ingreso. Por otro lado, la regresión por cuantiles, como herramienta, permite desagregar los retornos a la educación por nivel de ingreso utilizando el cuantil como unidad de análisis \citep{fiszbein2007}. Sin embargo, este método puede estar desatendiendo la existencia de relaciones no lineales. \cite{mahnic2022} argumenta que los métodos lineales pueden subestimar el impacto de la educación en el crecimiento económico. Se propone “estimar la relación entre los años de estudio de la población y el crecimiento económico mediante el impacto que los primeros tienen sobre el capital humano” \citep[p.~111]{mahnic2022}. Para ello, parte de la función de producción agregada aumentada por capital humano:
+
+\begin{equation}
+    Y = AK^{1-\alpha} H^\alpha \tag{5}
+    \label{eq:5}
+\end{equation}
+
+\noindent con $0<\alpha<1$, donde $Y$ es la producción agregada; $K$ y $H$, el stock de capital físico y humano respectivamente; y, $A$, la productividad total de los factores.
+
+Luego de derivar la función, que permite obtener las cotas superior e inferior del capital humano individual, en función de la educación y experiencia laboral; \cite{mahnic2022} procede a estimar el coeficiente $\alpha$ de la especificación (\ref{eq:5}). Luego, construye el modelo a estimar,
+
+\begin{equation}
+    \log y_{it} = \log A + (1-\alpha) \log k_{it} +\alpha \log h_{it}^* + e_{it} \tag{5.1}
+    \label{eq:5.1}
+\end{equation}
+
+\noindent donde $y_{it}$ representa el nivel de producción per cápita del país $i$ en el momento $t$; $k_{it}$, el stock de capital físico; y, $h_{it}^*$, un factor del capital humano per cápita que depende solo de los años de escolaridad y varia en función de la relación de Mincer considerada.
+
+El autor considera tres formas funcionales para representar la ecuación de Mincer: lineal, cuadrática y cubica. Utiliza datos de 99 países entre 1960 y 2010 para estimar por Mínimos Cuadrados Ordinarios Dinámicos (MCOD) y llega a la conclusión de que la especificación cuadrática ajusta mejor a los datos que la lineal \citep{mahnic2022}.
+
+Sin embargo, esto supone considerar los años de educación como unidad homogénea. Para ello \cite{mahnic2022} controla por calidad educativa según \cite{altinok2018}, para evidenciar de forma más robusta la existencia de no linealidades en la ecuación de Mincer.
+
+En línea con lo propuesto por \cite{mahnic2022}, con el objetivo de capturar efectos no lineales, \cite{kamdjou2023} propone estimar los retornos a la educación, reemplazando la técnica tradicional de MCO, por un enfoque moderno basado en algoritmos de aprendizaje automático (\textit{machine learning}, ML), en particular regresión de vectores de soporte (\textit{support vector regression}, SVR). Para ello, propone la siguiente función minceriana de ingresos,
+
+\begin{equation}
+    \log(w_i) = \beta_0' + \beta_p E_{p_i} + \beta_s E_{s_i} + \beta_t E_{t_i} +\beta_2'X_i + \beta_3'X_i^2 + \mu_i' \tag{6}
+    \label{eq:6}
+\end{equation}
+
+\noindent donde $w_i$ representa el ingreso horario del individuo $i$; $E_{p_i}$, $E_{s_i}$ y $E_{t_i}$ son variables dicotómicas (dummies) que toman valor $1$ si el individuo alcanzó la educación primaria, secundaria o terciaria, respectivamente, y $0$ en caso contrario; $X_i$, la experiencia potencial en el mercado laboral, calculada como la edad menos los años de educación menos $6$ $(X_i = \text{edad}_i - S_i - 6)$; $X_i^2$ es el cuadrado de la experiencia, que permite capturar efectos no lineales sobre los ingresos; $\beta_0'$, el intercepto de la regresión; $\beta_p$, $\beta_s$ y $\beta_t$, los coeficientes estimados asociados a los niveles educativo primario, secundario y terciario, respectivamente; $\beta_2'$ y $\beta_3'$, los coeficientes asociados a la experiencia y su cuadrado; y, $\mu_i'$, el término de error aleatorio que recoge factores no observados que afectan los ingresos.
+
+Evaluar los retornos a la educación a partir de métodos de ML, permite obtener estimaciones más precisas, robustas y con mejor capacidad predictiva. Su aplicación consiste en entrenar un modelo en base a un conjunto de datos conocidos, con entradas $(x)$ y salidas $(y)$, de modo que este aprenda la función $\hat{y}=f(x)$, a partir de minimizar una determinada función de perdida, entre los valores predichos y los reales. Finalmente, para evitar sobreajuste, el modelo se valida en datos que no han sido usados para su construcción \citep{kamdjou2023}.
+
+Producto de estimar (\ref{eq:6}) mediante SVR, con datos de ocho países representativos de diferentes regiones del mundo, \cite{kamdjou2023} encuentra que el retorno promedio a la educación se ubica en 10,4\%. Mientras que en América, Asia y Oceanía los retornos se encuentran cercanos al promedio mundial, en África están por encima, en torno al 18\% y, en Europa Occidental por debajo, en torno al 7\%. \cite{kamdjou2023} concluye que el uso de ML y, particularmente SVR, proporciona estimaciones más precisas y robustas de la ecuación de Mincer que MCO, en parte debido a la inclusión de no linealidades. Sin embargo, los coeficientes estimados mediante ML no son interpretables directamente y, dado que ML está orientado a la eficiencia predictiva, tampoco representan relaciones estructurales ni causales.
+
+\subsubsection{Modelos espaciales}
+
+Los trabajos empíricos, sobre los retornos a la educación antes citados, muestran que existe una relación positiva entre ingresos y años de educación formal. Los distintos autores hacen uso de diversas aplicaciones. \cite{margot2001} estima la TIR; \cite{fiszbein2007} utiliza un enfoque de regresión por cuantiles; \cite{gomez2018} incorpora los premios por calificación y, los métodos de Poisson y Heckman; y, \cite{himaz2016} hacen uso de efectos fijos. Todos estos enfoques explican, de distintos modos, el ingreso a partir de los años de educación como variable explicativa principal. \cite{herrera2016} invierte este orden y ubica como variable de interés el nivel educativo en función de la localización geográfica de los centros educativos.
+
+\cite{herrera2016} indaga como las características geográficas y sociales influyen en el desempeño educativo. Particularmente se pregunta sobre como la localización de las escuelas impacta en la tasa de repitencia escolar, para el periodo comprendido entre los años 2008 y 2011 con datos de 220 escuelas primarias de la provincia de San Luis.
+
+El modelo construido busca explicar la repitencia, medida como el porcentaje de alumnos repitentes respecto del total, a partir de características propias de la escuela como: su tamaño, el porcentaje de alumnos por profesor, la edad de los profesores, la cantidad de personal no educativo, el porcentaje de alumnos por aula y si la escuela es rural o no; y, de características geográficas a nivel de radio censal, como: el desempleo local, el nivel de hacinamiento, el nivel de analfabetismo y el porcentaje de mujeres en la población \citep{herrera2016}.
+
+\cite{herrera2016} estima tres modelos distintos de menor a mayor complejidad incluyendo las variables explicativas progresivamente; para terminar concluyendo que los alumnos con mayor tasa de repitencia tienden a concentrarse en los hogares más pobres y que, en consecuencia, destinar recursos a disminuir la desigualad de oportunidades es equivalente a disminuir la tasa de repitencia y el abandono escolar \citep{farias2007}. En ocasiones el diseño de políticas educativas está enfocado en los alumnos y no en su entorno. \cite{herrera2016} muestra que es tan importante prestar atención al contexto socio-espacial del lugar donde se enseña, como a sus características propias y a las condiciones de la población, para evitar que la movilidad económica se mantenga baja y estable en el tiempo como señalan \cite{neidhofer2022} para Latinoamérica.
+
+\subsection{Aprendizaje automático}
+
+\subsubsection{Econometría y aprendizaje automático}
+
+Los recientes avances en el poder de computo, sumados a la generación y almacenamiento de grandes volúmenes de datos (\textit{big data}) han impulsado la aparición de un nuevo paradigma (de análisis empírico) conocido como ML. La generación de modelos de aprendizaje automático, está centrada en la generación de algoritmos flexibles, capaces de capturar patrones completos, con alta capacidad predictiva y sin necesidad de imponer previamente una forma funcional especifica \citep{breiman2001, athey2019, mullainathan2017}. La econometría surge en una época donde, no solo el poder de computo era menor, sino que la disponibilidad de datos era escasa. Por lo tanto, se desarrollo en línea con la construcción de modelos con pocos predictores seleccionados cuidadosamente en función de la teoría subyacente. Por el contrario, los algoritmos propios del ML son capaces de manejar y sacar provecho del fenómeno de (\textit{big data}) \citep{charpentier2018}. Este fenómeno, conocido como la \textit{revolución de los datos}, está transformando el análisis económico \citep{einav2014}.
+
+Tanto en econometría como en ML, el enfoque consiste en la construcción de modelos predictivos a partir de un conjunto de datos. Sin embargo, estos difieren en cuanto a metas y enfoques \citep{mullainathan2017, charpentier2018}. Mientras que la econometría se centra en la generación de modelos paramétricos, que permiten explicar fenómenos sociales mediante la estimación de parámetros estructurales, en ML se busca maximizar la precisión predictiva \citep{mullainathan2017}. Así, \citet[p.~88]{mullainathan2017} señala que “el aprendizaje automático gira en torno al problema de la predicción. Lo atractivo es que logra descubrir patrones que se pueden generalizar. De hecho, el éxito de ML en tareas de inteligencia se debe, en gran medida, a su capacidad para identificar estructuras complejas que no fueron especificadas de antemano. Consigue ajustar formas funcionales complejas y muy flexibles a los datos sin caer simplemente en el sobreajuste; encuentra funciones que funcionan bien fuera de la muestra” (\textit{traducción propia}).
+
+\subsubsection{Convergencia reciente}
+
+\citet[p.~109]{breiman2001a} ilustra que “existen dos culturas en el uso del modelado estadístico para obtener conclusiones a partir de los datos. Una asume que los datos son generados por un modelo estocástico dado. La otra utiliza modelos algorítmicos y trata el mecanismo generador de los datos como desconocido” (\textit{traducción propia}).
+
+En los últimos años, ambas culturas han cooperado en la resolución de problemas vigentes en el análisis estadístico. Un caso de esto, es el problema de selección de variables en contextos en donde la cantidad de predictores $p$ es significativamente mayor a la cantidad de observaciones $n$. Bajo tales condiciones, estimar por MCO es inestable y, en ocasiones, produce sobreajuste. La técnica \textit{Least Absolute Shrinkage and Selection Operator} (LASSO) permite seleccionar automáticamente las variables más relevantes —algo impracticable mediante métodos tradicionales— con el fin de construir un modelo parsimonioso \citep{becker1964}. Utilizar LASSO en contextos de alta dimensionalidad, permite estimar la función objetivo de forma consistente sin perder de vista la relación causal \citep{mullainathan2017}. Como alternativa al problema de selección de variables se puede aplicar RIDGE que, a diferencia de LASSO, penaliza por $L_2$ \citep{athey2017} o también un enfoque híbrido de red elástica (\textit{elastic net}) que combina ambos tipos de penalización y obtiene las virtudes de cada uno de ellos \citep{zou2005}.
+
+Otra técnica de ML integrada a la predicción y clasificación de fenómenos de naturaleza económica es la de bosques aleatorios (\textit{random forest}). Esta técnica agregar, a partir de subconjuntos aleatorios de datos, múltiples arboles de decisión. El uso de bosques aleatorios permite reducir el sobreajuste y mejorar la generalización siendo útil en contextos de alta dimensionalidad. Este algoritmo ha demostrado un alto nivel de efectividad en cuanto a predicción y clasificación de problemas económicos \citep{breiman2001a}.
+
+\subsubsection{Predicción de desempeño académico}
+
+\cite{pallathadka2023} sostiene que mediante el uso de algoritmos de ML, es posible predecir el desempeño académico y, a través de la detección de patrones ocultos, clasificar y orientar las intervenciones correspondientes para evitar o minimizar el fracaso escolar. Para ello hace uso de tres técnicas: naïve bayes y arboles de decisión (\textit{decision trees}) para la predicción y, máquina de vectores de soporte (\textit{support vector machine}, SVM) para clasificación.
+
+Bajo el paradigma de ML, en cuanto a capacidad predictiva, no existe un modelo único dominante, sino que su efectividad depende de la naturaleza de los datos disponibles. \cite{sekeroglu2019} en un trabajo similar, utilizan redes neuronales (\textit{neural network}) y SVR para predicción y, gradient boosting para clasificación.
+
+Finalmente, SVM y SVR resultaron ser los mejores algoritmos para clasificar y predecir respectivamente las calificaciones y el rendimiento académico \citep{pallathadka2023, sekeroglu2019}.
+
+\section{Metodología y técnicas a utilizar} %(Una pagina)
+
+La presente investigación adopta un enfoque cuantitativo, con un diseño no experimental, transversal, retrospectivo y, de carácter predictivo y comparativo.
+
+La unidad de análisis son los hogares en Argentina, durante el periodo comprendido entre los años 2003 y 2024 inclusive. El INDEC\footnote{Instituto Nacional de Estadística y Censos de la República Argentina}, a través de la EPH, recopila información socioeconómica de los hogares y las personas que lo integran.
+
+La variable que se pretende explicar es el nivel educativo del hogar. Para ello, se propone construir una unidad homogénea que permita normalizar y comparar el déficit educativo en los hogares medido como,
+
+\begin{equation}
+    NE = \frac{\sum IEAE}{N}    \tag{7}
+    \label{eq:7}
+\end{equation}
+
+\noindent donde $NE$ es el nivel educativo del hogar; $N$, la cantidad de miembros mayores a seis años por hogar; $IEAE$ es un indice de educación ajustado por edad, que se calcula como la razón entre los años de escolaridad completada y esperada, donde esta ultima se obtiene restando 5 años a la edad de cada individuo dado que seis años es la edad de ingreso a la escuela primaria. Para individuos de 25 años o más, se propone un máximo de escolaridad esperada de 15 años. Este valor máximo es arbitrario y, conforme se evalúen los datos disponibles se podrá ajustar según la educación promedio de la población.
+
+Una segunda métrica propuesta para aproximar el nivel educativo de un hogar, consiste en calcular la proporción de miembros que, teniendo la edad necesaria para haber finalizado una determinada etapa escolar (primario o secundario) no la hayan completado. Se excluye el nivel terciario porque la duración del mismo varia según la orientación elegida.
+
+Las dos propuestas mencionadas, permiten la construcción de una tercera que consiste en agrupar y ordenar en cuantiles los niveles de \textit{ingreso educativo} de los hogares y, así establecer un umbral (por ejemplo, la mediana) como linea de \textit{pobreza educativa} para poder clasificar a los hogares.
+
+A nivel explicativo, las variables que pueden ser útiles para predecir el nivel educativo del hogar son las estructurales del mismo, incluyendo región geográfica, servicios básicos y nivel de hacinamiento; las de composición y organizacional del hogar; y las de ingresos. A su vez, ciertas variables recolectadas a nivel individuo pueden usarse para construir variables agregadas a nivel hogar como genero, ingreso y edad.
+
+Más allá de que la EPH permita utilizar una gran cantidad de variables explicativas, se pretende elaborar un modelo, que sea capaz de predecir eficientemente a partir de únicamente aquellas variables que tengan alto poder predictivo. Esto último puede conseguirse con una técnica de selección de variables como red elástica, siempre y cuando su inclusión sea pertinente y coherente con lo elaborado.
+
+En los casos en los que la variable dependiente sea del tipo ordinal o multinominal se explorará el uso de modelos de clasificación: regresión logística, bosques aleatorios y SVM. Cuando sea continua (como IEAE) se explorará el uso de modelos de regresión: MCO, Bosques aleatorios y SVR. Formalmente, se puede representar como:
+
+\begin{equation}
+    NE_i = f(X_i) + \varepsilon_i    \tag{8}
+    \label{eq:8}
+\end{equation}
+
+\noindent donde $NE_i$ representa el nivel educativo del hogar $i$; $X_i$, el vector de variables explicativas (región geográfica, hacinamiento, acceso a servicios básicos, ingreso total, etc.); y, $\varepsilon_i$, el término de error aleatorio que recoge factores no observados.
+
+En cuanto a la clasificación, se puede formalizar como:
+
+\begin{equation}
+    PE_i = \mathbb{I}(NE_i < \tau)   \tag{9}
+    \label{eq:9}
+\end{equation}
+
+\noindent donde $PE_i$, es una variable binaria que indica si el hogar $i$ tiene déficit educativo; $\mathbb{I}$, es la funcion indicadora que vale $1$ si la condicion se cumple y $0$ en caso contrario; $NE_i$, es el nivel educativo del hogar; y, $\tau$, el umbral de pobreza educativa.
+
+La manipulación, purificación y evaluación de los datos se llevará a cabo con el lenguaje de programación Python (versión 3.x), que gracias a su eficacia informática y al extenso ecosistema de librerías enfocadas en el análisis de datos y el aprendizaje automático, posibilitan la realización del presente trabajo \citep{python}.
+
+\subsection{Riesgos metodológicos y teóricos}
+
+A continuación se enumeran los principales riesgos metodológicos y teóricos identificados en el desarrollo del proyecto, junto con las estrategias de solución propuestas:
+
+\begin{table}[!htbp]
+\centering
+\renewcommand{\arraystretch}{1.4}
+\begin{tabularx}{\textwidth}{|p{3cm}|X|X|}
+\hline
+\textbf{Tipo de riesgo} & \textbf{Riesgo específico} & \textbf{Posible solución} \\
+\hline
+Metodológico & Algunas variables clave pueden no encontrarse disponibles o estar mal reportadas en la EPH. & Limpieza de datos, imputación múltiple, análisis de sensibilidad. \\
+\hline
+Metodológico & La definición de años esperados de escolaridad tiene supuestos arbitrarios. & Validación empírica con fuentes externas y pruebas de robustez con diferentes umbrales. \\
+\hline
+Metodológico & Algunos algoritmos no permiten identificar relaciones interpretables. & Uso de técnicas de interpretabilidad local. \\
+\hline
+Metodológico & Riesgo de incluir variables redundantes u omitir variables relevantes. & Combinación de métodos automáticos (red elástica) y criterio teórico. \\
+\hline
+Teórico & Posible tensión entre métodos predictivos y enfoques estructurales. & Enfatizar que el uso de ML complementa, no reemplaza, el análisis económico tradicional. \\
+\hline
+\end{tabularx}
+\label{table:1}
+\caption{Principales riesgos metodológicos y teóricos}
+\end{table}
+
+\subsection{Estructura preliminar de capítulos}
+\vspace{.25 cm}
+
+\noindent Se propone la siguiente estructura preliminar del trabajo:
+\begin{enumerate}
+    \item Introducción
+        \begin{enumerate}
+            \item[1.1] Motivación del estudio
+            \item[1.2] Preguntas de investigación
+            \item[1.3] Estructura del documento
+        \end{enumerate}
+    
+    \item Revisión de la literatura
+        \begin{enumerate}
+            \item[2.1] Teorías económicas sobre capital humano
+            \item[2.2] Retornos a la educación: evidencia internacional y en Argentina
+            \item[2.3] Modelos empíricos mincerianos
+            \item[2.4] Limitaciones econométricas y alternativas metodológicas
+            \item[2.5] Aplicaciones de aprendizaje automático en educación
+        \end{enumerate}
+    
+    \item Metodología
+        \begin{enumerate}
+            \item[3.1] Diseño metodológico
+            \item[3.2] Construcción de la métrica educativa
+                \begin{enumerate}
+                    \item[3.2.1] Índice de educación ajustado por edad (IEAE)
+                    \item[3.2.2] Métrica de cumplimiento de etapas
+                    \item[3.2.3] Umbral de pobreza educativa
+                \end{enumerate}
+            \item[3.3] Variables explicativas consideradas
+            \item[3.4] Técnicas de selección de variables
+            \item[3.5] Algoritmos de predicción
+                \begin{enumerate}
+                    \item[3.5.1] Regresión lineal y logística
+                    \item[3.5.2] Random Forest
+                    \item[3.5.3] SVM y SVR
+                \end{enumerate}
+            \item[3.6] Evaluación del desempeño predictivo
+        \end{enumerate}
+    
+    \item Resultados
+        \begin{enumerate}
+            \item[4.1] Descripción de la muestra
+            \item[4.2] Métricas educativas construidas
+            \item[4.3] Comparación de algoritmos
+            \item[4.4] Importancia de variables predictoras
+            \item[4.5] Validación cruzada y errores de predicción
+        \end{enumerate}
+    
+    \item Discusión
+        \begin{enumerate}
+            \item[5.1] Implicancias de los resultados
+            \item[5.2] Interpretabilidad vs. poder predictivo
+            \item[5.3] Limitaciones metodológicas
+            \item[5.4] Comparación con literatura previa
+        \end{enumerate}
+    
+    \item Conclusiones y recomendaciones
+        \begin{enumerate}
+            \item[6.1] Principales hallazgos
+            \item[6.2] Aportes metodológicos y empíricos
+            \item[6.3] Recomendaciones para políticas públicas
+            \item[6.4] Líneas futuras de investigación
+        \end{enumerate}
+\end{enumerate}
+
+\clearpage
+\section{Cronograma} %(Una pagina)
+\vspace{.25 cm}
+
+\noindent El siguiente cronograma se presenta como tentativo para la realización del trabajo.
+
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{1.3}
+\arrayrulecolor{black}
+\rowcolors{2}{gray!10}{white}
+\begin{tabular}{|p{5.5cm}|*{7}{c|}}
+\hline
+\rowcolor{gray!30}
+\textbf{Actividad} & \textbf{Jun} & \textbf{Jul} & \textbf{Ago} & \textbf{Sep} & \textbf{Oct} & \textbf{Nov} & \textbf{Dic} \\
+\hline
+Revisión de literatura y antecedentes & X & X &   &   &   &   &   \\
+\hline
+Construcción de base de datos & X & X &   &   &   &   &   \\
+\hline
+Definición de métricas educativas &   & X & X &   &   &   &   \\
+\hline
+Entrenamiento de modelos de ML &   &   & X & X &   &   &   \\
+\hline
+Evaluación y validación de modelos &   &   &   & X & X &   &   \\
+\hline
+Interpretación de resultados &   &   &   &   & X & X &   \\
+\hline
+Redacción de resultados y discusión &   &   &   &   & X & X & X \\
+\hline
+Revisión final y presentación del trabajo &   &   &   &   &   & X & X \\
+\hline
+\end{tabular}
+\caption{Cronograma de actividades: Junio - Diciembre}
+\end{table}
+
+
+\clearpage
+\bibliography{bibliografia}
+
+\end{document}

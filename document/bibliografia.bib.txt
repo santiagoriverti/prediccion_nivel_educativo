@@ -1,0 +1,333 @@
+@article{athey2019,
+  author = {Susan Athey and Guido W. Imbens},
+  title = {Machine Learning Methods That Economists Should Know About},
+  journal = {Annual Review of Economics},
+  volume = {11},
+  number = {1},
+  pages = {685--725},
+  year = {2019}
+}
+
+@article{mahnic2022,
+  author = {P. Mahnic},
+  title = {Educación y crecimiento económico: considerando no linealidades en la ecuación de {Mincer}},
+  journal = {Económica},
+  volume = {68},
+  pages = {27--27},
+  year = {2022}
+}
+
+@inproceedings{margot2001,
+  author = {D. Margot},
+  title = {Rendimientos de la educación en {Argentina}: Un análisis dinámico basado en cohortes},
+  booktitle = {XXXVI Reunión Anual de la Asociación Argentina de Economía Política},
+  address = {Buenos Aires},
+  year = {2001},
+  note = {14 al 16 de noviembre}
+}
+
+@article{mora2023,
+  author = {J. J. Mora and D. Y. Herrera and J. F. Alvarez and J. S. Arroyo},
+  title = {Returns to Human Capital in a Developing Country: A Pseudo-Panel Approach for {Colombia}},
+  journal = {Economics \& Sociology},
+  volume = {16},
+  number = {1},
+  pages = {57--70},
+  year = {2023}
+}
+
+@incollection{golley2019,
+  author = {Jane Golley and Yixiao Zhou and Meiyan Wang},
+  title = {Inequality of Opportunity and Gender Discrimination in {China's} Labour Income},
+  booktitle = {The Chinese Economic Transformation: Views from Young Economists},
+  editor = {Ligang Song and Ross Garnaut and Cai Fang and Lauren Johnston},
+  publisher = {ANU Press},
+  address = {Canberra},
+  year = {2019},
+  pages = {237--261},
+  isbn = {9781760463120},
+  doi = {10.22459/CET.2019.12}
+}
+
+@article{herrera2016,
+  author = {Herrera Gómez, Marcos},
+  title = {{¿La localización de la escuela importa? Condicionantes espacio-contextuales de la tasa de repitencia en un panel de datos georreferenciados}},
+  journal = {Documento académico CONICET - IELDE},
+  year = {2016},
+  note = {Disponible públicamente},
+}
+
+
+@article{breiman2001,
+  author = {Leo Breiman},
+  title = {Random Forests},
+  journal = {Machine Learning},
+  volume = {45},
+  pages = {5--32},
+  year = {2001}
+}
+
+@article{zou2005,
+  author = {Hui Zou and Trevor Hastie},
+  title = {Regularization and Variable Selection via the Elastic Net},
+  journal = {Journal of the Royal Statistical Society: Series B},
+  volume = {67},
+  number = {2},
+  pages = {301--320},
+  year = {2005}
+}
+
+@article{mullainathan2017,
+  author = {Sendhil Mullainathan and Jann Spiess},
+  title = {Machine Learning: An Applied Econometric Approach},
+  journal = {Journal of Economic Perspectives},
+  volume = {31},
+  number = {2},
+  pages = {87--106},
+  year = {2017}
+}
+
+@article{kemelbayeva2020,
+  author = {Saule Kemelbayeva},
+  title = {Returns to Schooling in {Kazakhstan}: An Update Using a Pseudo-Panel Approach},
+  journal = {Eurasian Economic Review},
+  volume = {10},
+  number = {3},
+  pages = {437--487},
+  year = {2020}
+}
+
+@article{himaz2016,
+  author = {Rozana Himaz and Harsha Aturupane},
+  title = {Returns to Education in {Sri Lanka}: A Pseudo-Panel Approach},
+  journal = {Education Economics},
+  volume = {24},
+  number = {3},
+  pages = {300--311},
+  year = {2016}
+}
+
+@unpublished{gomez2018,
+  author = {M. C. Gómez},
+  title = {Returns to Education and Skill Premiums: Estimation and Biases Associated with the Case of {Argentina}},
+  year = {2018},
+  note = {Manuscrito no publicado}
+}
+
+@article{pallathadka2023,
+  author = {H. Pallathadka and A. Wenda and E. Ramirez-Asís and M. Asís-López and J. Flores-Albornoz and K. Phasinam},
+  title = {Classification and Prediction of Student Performance Data Using Various Machine Learning Algorithms},
+  journal = {Materials Today: Proceedings},
+  volume = {80},
+  pages = {3782--3785},
+  year = {2023}
+}
+
+@inproceedings{sekeroglu2019,
+  author = {B. Sekeroglu and K. Dimililer and K. Tuncal},
+  title = {Student Performance Prediction and Classification Using Machine Learning Algorithms},
+  booktitle = {Proceedings of the 8th International Conference on Educational and Information Technology},
+  pages = {7--11},
+  year = {2019}
+}
+
+@article{kamdjou2023,
+  author = {H. D. T. Kamdjou},
+  title = {Estimating the Returns to Education Using a Machine Learning Approach -- Evidence for Different Regions},
+  journal = {Open Education Studies},
+  volume = {5},
+  number = {1},
+  pages = {20220201},
+  year = {2023}
+}
+
+@techreport{neidhofer2022,
+  author = {Guido Neidhöfer and Matteo Ciaschi and Leonardo Gasparini},
+  title = {Intergenerational Mobility of Economic Well-Being in {Latin America}},
+  institution = {Documento de Trabajo},
+  number = {303},
+  year = {2022}
+}
+
+@article{fiszbein2007,
+  author = {Ariel Fiszbein and Paula Inés Giovagnoli and Harry Anthony Patrinos},
+  title = {Estimating the Returns to Education in {Argentina} Using Quantile Regression Analysis: 1992--2002},
+  journal = {Económica},
+  volume = {53},
+  pages = {53--72},
+  year = {2007}
+}
+
+@article{einav2014,
+  author = {Liran Einav and Jonathan Levin},
+  title = {The Data Revolution and Economic Analysis},
+  journal = {Innovation Policy and the Economy},
+  volume = {14},
+  number = {1},
+  pages = {1--24},
+  year = {2014}
+}
+
+@article{charpentier2018,
+  author = {Arthur Charpentier and Emmanuel Flachaire and Abderrahim Ly},
+  title = {Econometrics and Machine Learning},
+  journal = {Économie et Statistique},
+  volume = {505},
+  number = {1},
+  pages = {147--169},
+  year = {2018}
+}
+
+@article{athey2017,
+  author = {Susan Athey and Guido W. Imbens},
+  title = {The State of Applied Econometrics: Causality and Policy Evaluation},
+  journal = {Journal of Economic Perspectives},
+  volume = {31},
+  number = {2},
+  pages = {3--32},
+  year = {2017}
+}
+
+@article{belloni2014,
+  author = {Alexandre Belloni and Victor Chernozhukov and Christian Hansen},
+  title = {High-Dimensional Methods and Inference on Structural and Treatment Effects},
+  journal = {Journal of Economic Perspectives},
+  volume = {28},
+  number = {2},
+  pages = {29--50},
+  year = {2014}
+}
+
+@book{mincer1974,
+  author = {Jacob A. Mincer},
+  title = {Schooling, Experience, and Earnings},
+  publisher = {National Bureau of Economic Research},
+  address = {New York},
+  year = {1974}
+}
+
+@book{becker1964,
+  author = {Gary S. Becker},
+  title = {Human Capital},
+  publisher = {NBER},
+  address = {New York},
+  year = {1964}
+}
+
+@book{smith1776,
+  author = {Adam Smith},
+  title = {An Inquiry into the Nature and Causes of the Wealth of Nations},
+  publisher = {W. Strahan and T. Cadell},
+  address = {London},
+  year = {1776},
+  note = {Primera edición}
+}
+
+@article{schultz1961,
+  author = {Theodore W. Schultz},
+  title = {Investment in Human Capital},
+  journal = {American Economic Review},
+  volume = {51},
+  number = {1},
+  pages = {1--17},
+  year = {1961}
+}
+
+@book{marshall1890,
+  author = {Alfred Marshall},
+  title = {Principles of Economics},
+  publisher = {Macmillan and Co.},
+  address = {London},
+  year = {1890},
+  note = {First edition}
+}
+
+@article{heckman1979,
+  author  = {James J. Heckman},
+  title   = {Sample Selection Bias as a Specification Error},
+  journal = {Econometrica: Journal of the Econometric Society},
+  volume  = {47},
+  number  = {1},
+  pages   = {153--161},
+  year    = {1979}
+}
+
+@book{farias2007,
+  author    = {Farías, M. and Fiol, D. and Kit, I. and Melgar, S.},
+  title     = {Todos pueden aprender: Propuestas para superar el fracaso escolar},
+  year      = {2007},
+  publisher = {Fondo de las Naciones Unidas para la Infancia y Asociación Civil Educación para Todos},
+  address   = {Buenos Aires}
+}
+
+@techreport{altinok2018,
+  author    = {Altinok, Nadir and Angrist, Noam and Patrinos, Harry},
+  title     = {Global Data Set on Education Quality (1965--2015)},
+  institution = {World Bank Group},
+  number    = {Policy Research Working Paper 8314},
+  year      = {2018}
+}
+
+@article{tunali1986,
+  author    = {Tunali, Insan},
+  title     = {A general structure for models of double-selection and an application to a joint migration/earnings process with remigration},
+  journal   = {Research in Labor Economics},
+  volume    = {8},
+  pages     = {235--282},
+  year      = {1986}
+}
+
+@book{medema2004,
+  author    = {Steven G. Medema and Warren J. Samuels},
+  title     = {The History of Economic Thought: A Reader},
+  year      = {2004},
+  publisher = {Routledge},
+  address   = {London and New York}
+}
+
+@book{malthus2024,
+  author    = {Thomas Robert Malthus},
+  title     = {Principles of Political Economy Considered with a View to Their Practical Application},
+  year      = {2024},
+  publisher = {BoD--Books on Demand},
+  address   = {Norderstedt}
+}
+
+@article{breiman2001a,
+  author    = {Breiman, Leo},
+  title     = {Statistical Modeling: The Two Cultures (with comments and a rejoinder by the author)},
+  journal   = {Statistical Science},
+  volume    = {16},
+  number    = {3},
+  pages     = {199--231},
+  year      = {2001},
+  publisher = {Institute of Mathematical Statistics}
+}
+
+@misc{INDEC_EPH_2025,
+  author       = {{Instituto Nacional de Estadística y Censos (INDEC)}},
+  title        = {{Encuesta Permanente de Hogares (EPH) total urbano. Diseño de registro y estructura para las bases usuarias: Hogar y Personas}},
+  year         = {2025},
+  month        = {febrero},
+  url          = {https://www.indec.gob.ar/ftp/cuadros/menusuperior/eahu/EPH_tot_urbano_estructura_bases_2024.pdf},
+  note         = {Disponible en línea. Consultado el 23 de mayo de 2025},
+  institution  = {INDEC},
+  address      = {Buenos Aires, Argentina}
+}
+
+@manual{python,
+  title        = {Python 3.12.0 Documentation},
+  author       = {{Python Software Foundation}},
+  year         = {2023},
+  note         = {\url{https://www.python.org/doc/}},
+  organization = {Python Software Foundation}
+}
+
+@misc{pyeph,
+  author       = {Méndez, Agustín},
+  title        = {pyeph: Herramientas para el análisis de la Encuesta Permanente de Hogares (EPH)},
+  year         = {2024},
+  note         = {Disponible en \url{https://pyeph.readthedocs.io/es/latest/}},
+  howpublished = {\textit{Documentación técnica del paquete pyeph}},
+  url          = {https://pyeph.readthedocs.io/es/latest/}
+}
