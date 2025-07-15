@@ -32,6 +32,7 @@ Los datos provienen de la EPH (INDEC), procesados con `pyeph` y validados según
 - `EPH_nota_metodologica_1_trim_2019.pdf`
 - `PTFM_SR.pdf`
 
+## GitHub
 ---
 
 ## ▶️ Requisitos
