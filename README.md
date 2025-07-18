@@ -36,3 +36,31 @@ Desarrollar modelos predictivos de regresión y clasificación para estimar el n
 │   ├── EPH_nota_metodologica_1_trim_2019.pdf
 │   └── Bases exportadas (df_*.xlsx)
 
+## Instrucciones para el Repositorio
+
+### Clonar el Repositorio
+Abrir cmd
+
+cd C:... (completar con directorio local)
+
+git clone https://github.com/santiagoriverti/prediccion_nivel_educativo.git
+
+### Actualizar repositorio local
+Abrir cmd 
+
+cd C:... (completar con direccion del repositorio local)
+
+git pull
+
+### Actualizar repositorio remoto en rama principal
+Abrir cmd
+
+cd C:... (completar con direccion del repositorio local)
+
+git status
+
+git add .
+
+git commit -m "comentario"
+
+git push origin main
