@@ -1,41 +1,38 @@
-# Predicción del Nivel Educativo en Hogares Argentinos
+# 📊 Predicción del Nivel Educativo en Hogares Argentinos
 
-Este proyecto aplica técnicas de aprendizaje automático para estimar el **nivel educativo promedio ajustado por edad (IEAE)** en hogares urbanos de Argentina, utilizando microdatos de la **Encuesta Permanente de Hogares (EPH)** del INDEC.
+Este proyecto aplica técnicas de aprendizaje automático para predecir el **índice educativo ajustado por edad (IEAE)** en hogares urbanos de Argentina. Utiliza microdatos de la **Encuesta Permanente de Hogares (EPH)** del INDEC correspondientes al **4º trimestre de 2023**.
 
----
-
-## 📦 Contenido
-
-- Limpieza y validación de datos EPH (4º trimestre 2023)
-- Construcción de variables educativas y sociodemográficas por hogar
-- Modelos de **regresión**: Lasso, Ridge, ElasticNet, SVR, Random Forest
-- Modelos de **clasificación** binaria (por debajo de la mediana): Random Forest y SVM
-- Evaluación con métricas de desempeño: R², RMSE, accuracy, F1-score
+El IEAE es una métrica que compara la escolaridad alcanzada por los miembros del hogar con la escolaridad esperada según su edad. Esta aproximación permite identificar **rezagos educativos estructurales**, más allá del nivel educativo promedio.
 
 ---
 
-## 📁 Estructura
+## 📌 Objetivo
 
-- `scripts/`: notebook con el código completo
-- `document/`: 
-  - PDFs metodológicos de EPH e INDEC
-  - Bases exportadas (`.xlsx`) del procesamiento
+Desarrollar modelos predictivos de regresión y clasificación para estimar el nivel educativo del hogar, y explorar la importancia relativa de variables sociodemográficas, estructurales y de ingresos.
 
 ---
 
-## 🧾 Datos y fuentes
+## ⚙️ Funcionalidades principales
 
-Los datos provienen de la EPH (INDEC), procesados con `pyeph` y validados según:
+- ✅ Descarga y validación de bases EPH (`pyeph`)
+- 🧹 Limpieza de variables y filtrado por rangos válidos según la documentación oficial
+- 🧠 Cálculo de escolaridad efectiva (`EDA_ESC`) y esperada (`EDA_ESP`) por individuo
+- 🏡 Agregación de indicadores a nivel hogar
+- 📈 Modelos de regresión: `Lasso`, `Ridge`, `ElasticNet`, `SVR`, `Random Forest`
+- 🧮 Clasificación binaria de hogares con bajo nivel educativo (`PE`) usando `RandomForestClassifier` y `SVM`
+- 🧪 Evaluación de desempeño: `R²`, `RMSE`, `accuracy`, `F1-score`, `confusion matrix`
 
-- `EPH_registro_4T2023.pdf`
-- `EPH_consideraciones_metodologicas_2t20.pdf`
-- `EPH_nota_metodologica_1_trim_2019.pdf`
-- `PTFM_SR.pdf`
-
-## GitHub
 ---
 
-## ▶️ Requisitos
+## 📁 Estructura del proyecto
 
-```bash
-pip install pyeph scikit-learn openpyxl
+```text
+├── scripts/
+│   └── notebook con el pipeline completo
+├── document/
+│   ├── PTFM_SR.pdf                            # Proyecto académico
+│   ├── EPH_registro_4T2023.pdf                # Diccionario de variables
+│   ├── EPH_consideraciones_metodologicas_2t20.pdf
+│   ├── EPH_nota_metodologica_1_trim_2019.pdf
+│   └── Bases exportadas (df_*.xlsx)
+
