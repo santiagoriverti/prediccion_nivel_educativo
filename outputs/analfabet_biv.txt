@@ -1,0 +1,70 @@
+======================================================================
+(1) OLS simple: NE ~ ANALFABET (sin controles)
+======================================================================
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                     NE   R-squared:                       0.000
+Model:                            OLS   Adj. R-squared:                  0.000
+Method:                 Least Squares   F-statistic:                     1.922
+Date:                Wed, 10 Jun 2026   Prob (F-statistic):              0.166
+Time:                        16:33:13   Log-Likelihood:                 8641.9
+No. Observations:               15906   AIC:                        -1.728e+04
+Df Residuals:                   15904   BIC:                        -1.726e+04
+Df Model:                           1                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const          0.7540      0.001    642.018      0.000       0.752       0.756
+ANALFABET     -0.0144      0.010     -1.386      0.166      -0.035       0.006
+==============================================================================
+Omnibus:                     2818.886   Durbin-Watson:                   1.919
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             5279.187
+Skew:                          -1.105   Prob(JB):                         0.00
+Kurtosis:                       4.755   Cond. No.                         9.34
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+
+======================================================================
+(2) OLS con controles: NE ~ ANALFABET + EDA + IPCF
+======================================================================
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                     NE   R-squared:                       0.198
+Model:                            OLS   Adj. R-squared:                  0.198
+Method:                 Least Squares   F-statistic:                     1309.
+Date:                Wed, 10 Jun 2026   Prob (F-statistic):               0.00
+Time:                        16:33:13   Log-Likelihood:                 10397.
+No. Observations:               15906   AIC:                        -2.079e+04
+Df Residuals:                   15902   BIC:                        -2.075e+04
+Df Model:                           3                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const          0.8745      0.003    327.131      0.000       0.869       0.880
+ANALFABET     -0.1316      0.010    -13.680      0.000      -0.150      -0.113
+EDA           -0.0033   5.49e-05    -59.604      0.000      -0.003      -0.003
+IPCF        6.139e-08   2.28e-09     26.960      0.000    5.69e-08    6.59e-08
+==============================================================================
+Omnibus:                     1714.945   Durbin-Watson:                   1.894
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             2974.220
+Skew:                          -0.746   Prob(JB):                         0.00
+Kurtosis:                       4.503   Cond. No.                     5.59e+06
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 5.59e+06. This might indicate that there are
+strong multicollinearity or other numerical problems.
+
+Tabla comparativa:
+               Modelo  Variable  Coeficiente  Error Estándar  p-value
+      (1) No controls     const       0.7540          0.0012   0.0000
+      (1) No controls ANALFABET      -0.0144          0.0104   0.1656
+(2) With EDA and IPCF     const       0.8745          0.0027   0.0000
+(2) With EDA and IPCF ANALFABET      -0.1316          0.0096   0.0000
+(2) With EDA and IPCF       EDA      -0.0033          0.0001   0.0000
+(2) With EDA and IPCF      IPCF       0.0000          0.0000   0.0000

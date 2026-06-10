@@ -1,0 +1,15 @@
+\begin{table}
+\caption{10-fold cross-validation of the classification models (mean $\pm$ standard deviation)}
+\label{tab:cv_clasificacion}
+\begin{tabular}{lcccc}
+\toprule
+Model & Accuracy & F1 & Precision & Recall \\
+\midrule
+XGBoost & 0.7074 $\pm$ 0.0115 & 0.7020 $\pm$ 0.0113 & 0.7040 $\pm$ 0.0145 & 0.7002 $\pm$ 0.0150 \\
+Random Forest & 0.6985 $\pm$ 0.0106 & 0.6885 $\pm$ 0.0121 & 0.7005 $\pm$ 0.0116 & 0.6771 $\pm$ 0.0170 \\
+SVM & 0.6918 $\pm$ 0.0051 & 0.6844 $\pm$ 0.0050 & 0.6900 $\pm$ 0.0086 & 0.6791 $\pm$ 0.0109 \\
+Logit & 0.6711 $\pm$ 0.0104 & 0.6524 $\pm$ 0.0133 & 0.6796 $\pm$ 0.0109 & 0.6276 $\pm$ 0.0195 \\
+KNN & 0.6535 $\pm$ 0.0107 & 0.6484 $\pm$ 0.0113 & 0.6476 $\pm$ 0.0115 & 0.6492 $\pm$ 0.0140 \\
+\bottomrule
+\end{tabular}
+\end{table}

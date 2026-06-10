@@ -1,0 +1,17 @@
+\begin{table}
+\caption{10-fold cross-validation of the regression models (mean $\pm$ standard deviation)}
+\label{tab:cv_regression}
+\begin{tabular}{lccc}
+\toprule
+Model & $R^2$ & RMSE & MAE \\
+\midrule
+XGBoost & 0.3490 $\pm$ 0.0284 & 0.1133 $\pm$ 0.0023 & 0.0857 $\pm$ 0.0012 \\
+SVR & 0.3155 $\pm$ 0.0287 & 0.1162 $\pm$ 0.0020 & 0.0891 $\pm$ 0.0014 \\
+RandomForest & 0.2789 $\pm$ 0.0219 & 0.1193 $\pm$ 0.0019 & 0.0899 $\pm$ 0.0011 \\
+Ridge & 0.2257 $\pm$ 0.0122 & 0.1236 $\pm$ 0.0023 & 0.0947 $\pm$ 0.0016 \\
+Lasso & 0.2257 $\pm$ 0.0122 & 0.1236 $\pm$ 0.0023 & 0.0947 $\pm$ 0.0016 \\
+ElasticNet & 0.2257 $\pm$ 0.0122 & 0.1236 $\pm$ 0.0023 & 0.0947 $\pm$ 0.0016 \\
+KNN & 0.1999 $\pm$ 0.0304 & 0.1256 $\pm$ 0.0023 & 0.0946 $\pm$ 0.0015 \\
+\bottomrule
+\end{tabular}
+\end{table}
