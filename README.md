@@ -2,7 +2,7 @@
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/santiagoriverti/prediccion_nivel_educativo/blob/main/scripts/prediccion_nivel_educativo.ipynb)
 
-Este proyecto aplica técnicas de aprendizaje automático para predecir el **nivel educativo ajustado por edad (NE)** en hogares urbanos de Argentina. Utiliza microdatos de la **Encuesta Permanente de Hogares (EPH)** del INDEC correspondientes al **4º trimestre de 2023**.
+Este proyecto aplica técnicas de aprendizaje automático para predecir el **nivel educativo ajustado por edad (NE)** en hogares urbanos de Argentina. Utiliza microdatos de la **Encuesta Permanente de Hogares (EPH)** del INDEC, descargados automáticamente con `pyeph` (actualmente configurado para el **4º trimestre de 2024**; el período se ajusta en la celda de descarga del notebook). La carpeta `document/` incluye bases de referencia del 4º trimestre de 2023.
 
 El NE se calcula como la razón entre la escolaridad alcanzada y la escolaridad esperada de los miembros del hogar. Esta métrica permite identificar **rezagos educativos estructurales**, más allá del nivel educativo promedio, considerando la composición etaria del hogar.
 
