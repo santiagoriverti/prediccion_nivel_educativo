@@ -39,9 +39,9 @@ Desarrollar modelos predictivos de regresión y clasificación para estimar el n
 ├── scripts/
 │   └── notebook con el pipeline completo
 ├── outputs/
-│   └── tablas exportadas (CSV y LaTeX) generadas por el notebook
+│   └── resultados generados por el notebook: tablas (CSV y LaTeX),
+│       gráficos (PNG a 600 dpi) y bases procesadas (df_*.xlsx)
 ├── document/
-│   ├── PTFM_SR.pdf                            # Proyecto académico
 │   ├── EPH_registro_4T2023.pdf                # Diccionario de variables
 │   ├── EPH_consideraciones_metodologicas_2t20.pdf
 │   ├── EPH_nota_metodologica_1_trim_2019.pdf
@@ -63,7 +63,7 @@ El pipeline completo está en [`scripts/prediccion_nivel_educativo.ipynb`](scrip
    !pip install --quiet pyeph scikit-learn openpyxl shap xgboost statsmodels jinja2
    ```
 
-3. Las tablas exportadas (CSV y LaTeX) quedan en la carpeta `outputs/` del entorno de Colab (panel lateral de archivos), desde donde se pueden descargar.
+3. Todos los resultados — tablas (CSV y LaTeX), gráficos (PNG a 600 dpi) y bases procesadas (xlsx) — quedan en la carpeta `outputs/` del entorno de Colab (panel lateral de archivos), desde donde se pueden descargar.
 
 ### 💻 Correr en local
 
@@ -85,7 +85,7 @@ pip install pyeph scikit-learn openpyxl shap xgboost statsmodels jinja2 pandas n
 jupyter notebook scripts/prediccion_nivel_educativo.ipynb
 ```
 
-Las tablas exportadas se guardan en una carpeta `outputs/` creada en el directorio de trabajo desde el que se ejecuta el notebook.
+Todos los resultados (tablas, gráficos y bases procesadas) se guardan en una carpeta `outputs/` creada en el directorio de trabajo desde el que se ejecuta el notebook.
 
 
 ## Instrucciones para el Repositorio
