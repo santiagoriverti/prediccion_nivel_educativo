@@ -213,6 +213,24 @@ La figura `outputs/curva_ROC_modelos.png` (ya en inglés) reemplaza a
 AUC/AP de la consola (celdas 35 y 36) para Claude chat, y sube el nuevo
 `curva_ROC_modelos.png` a Overleaf.
 
+### Tarea A y B (2026-06-11, continuación)
+
+A) **Los 7 gráficos quedan en inglés**. Se tradujo la celda 15 (los 5
+gráficos de distribución del NE): ejes "Educational Level (NE)" /
+"Frequency" / "Density", anotaciones "Mean" / "Median", y leyendas
+"Region" / "Urban agglomeration" / "Age (years)" / "IPCF decile
+(national)". Los nombres de regiones/aglomerados son topónimos y quedan
+igual. Las curvas ROC/PR ya estaban en inglés.
+
+B) **AUC y AP ahora se exportan a archivo**: la celda 36 genera
+`outputs/auc_ap.csv` y `outputs/auc_ap.tex` (booktabs, ordenado por AUC
+desc, columnas Model/AUC/AP), además de imprimirlos en consola. Ya no
+hay que copiarlos de la leyenda.
+
+Total de tablas exportadas ahora: 9 .tex (+ csv donde aplica). El usuario
+debe re-ejecutar el notebook para regenerar los 7 PNG en inglés y la
+nueva tabla auc_ap. Solo se commiteó código + memoria (sin outputs).
+
 ## Cierre 2026-06-10
 
 Estado: el repo está completo y consistente. El notebook usa los 8
