@@ -185,6 +185,34 @@ Los 22 archivos quedaron en `outputs/` del repo (tablas + 7 png 600dpi
   Los scripts operativos de `.claude/` (push.ps1, _run_nb.py, run_log.txt)
   y la caché `pyeph/` quedan excluidos vía `.git/info/exclude`.
 
+## Sesión 2026-06-11: curvas ROC/PR en formato paper + valores AUC/AP
+
+Claude chat (que edita el main_anon.tex en Overleaf) pidió: (a) regenerar
+las figuras de curvas con etiquetas en inglés y sin título, y (b) los
+valores de AUC y AP del modelo nuevo (los del paper eran del feature set
+viejo). Hecho:
+- Celda 36 (ROC): "False Positive Rate" / "True Positive Rate",
+  leyenda "Chance (AUC = 0.5)", sin título. Celda 35 (PR): sin título
+  (ejes ya estaban en inglés). Ambas imprimen ahora AUC/AP por consola
+  (loop al final que lista cada modelo con su valor).
+- **Commit solo del CÓDIGO** (notebook) + esta memoria. Los outputs NO se
+  commitearon en esta sesión: el usuario ejecuta el notebook y genera las
+  figuras y valores oficiales (al ser deterministas coincidirán con los de
+  abajo, que provienen de una corrida local de verificación).
+
+**Valores de referencia (corrida de verificación, feature set correcto,
+τ = 0.78; el usuario debe regenerarlos):**
+- AUC:  XGBoost 0.7812 | RF 0.7706 | SVM 0.7544 | Logit 0.7307 | KNN 0.6980
+- AP:   XGBoost 0.7765 | RF 0.7597 | SVM 0.7293 | Logit 0.7007 | KNN 0.6509
+(En el paper viejo: AUC 0.775/0.768/0.753/0.729/0.705 — el orden de
+modelos se mantiene.)
+La figura `outputs/curva_ROC_modelos.png` (ya en inglés) reemplaza a
+`figuras/curvas_ROC_PE.png` en Overleaf.
+
+**Pendiente de esta sesión**: el usuario corre el notebook, copia los
+AUC/AP de la consola (celdas 35 y 36) para Claude chat, y sube el nuevo
+`curva_ROC_modelos.png` a Overleaf.
+
 ## Cierre 2026-06-10
 
 Estado: el repo está completo y consistente. El notebook usa los 8
