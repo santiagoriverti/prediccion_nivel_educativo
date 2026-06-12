@@ -1,118 +1,171 @@
-# 📊 Predicción del Nivel Educativo en Hogares Argentinos
+# 📊 Predicting Educational Attainment in Argentine Households
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/santiagoriverti/prediccion_nivel_educativo/blob/main/scripts/prediccion_nivel_educativo.ipynb)
 
-Este proyecto aplica técnicas de aprendizaje automático para predecir el **nivel educativo ajustado por edad (NE)** en hogares urbanos de Argentina. Utiliza microdatos de la **Encuesta Permanente de Hogares (EPH)** del INDEC, descargados automáticamente con `pyeph` (actualmente configurado para el **4º trimestre de 2024**; el período se ajusta en la celda de descarga del notebook). La carpeta `document/` incluye bases de referencia del 4º trimestre de 2023.
+This project applies machine-learning techniques to predict the **age-adjusted
+educational level (NE)** of urban households in Argentina. It uses microdata
+from the **Permanent Household Survey (EPH)** published by INDEC, downloaded
+automatically with `pyeph` (currently configured for **2024 Q4**; the period
+can be changed in the data-download cell of the notebook). The `document/`
+folder includes reference files from 2023 Q4.
 
-El NE se calcula como la razón entre la escolaridad alcanzada y la escolaridad esperada de los miembros del hogar. Esta métrica permite identificar **rezagos educativos estructurales**, más allá del nivel educativo promedio, considerando la composición etaria del hogar.
-
----
-
-## 📌 Objetivo
-
-Desarrollar modelos predictivos de regresión y clasificación para estimar el nivel educativo del hogar, y explorar la importancia relativa de variables sociodemográficas, estructurales y de ingresos.
-
----
-
-## ⚙️ Funcionalidades principales
-
-- ✅ Descarga y validación automática de bases EPH (`pyeph`)
-- 🧹 Limpieza y filtrado de variables según rangos válidos establecidos en la documentación oficial
-- 🧠 Cálculo de escolaridad efectiva (`EDA_ESC`), esperada (`EDA_ESP`) e índice educativo ajustado (`IEAE`)
-- 🏡 Agregación de indicadores al nivel hogar (edad, género, analfabetismo, ocupación, hacinamiento, etc.)
-- 📈 Modelos de regresión: `Lasso`, `Ridge`, `ElasticNet`, `Random Forest`, `SVR`, `XGBoost`, `KNN`
-- 🧮 Clasificación binaria de hogares con bajo nivel educativo (`PE`) usando `Logistic Regression`, `RandomForestClassifier`, `SVM`, `XGBoostClassifier`, `KNN`
-- 📊 Visualización de resultados: histogramas, KDE, curvas ROC y PR, matrices de correlación
-- 🔍 Interpretabilidad con SHAP y Permutation Importance (regresión y clasificación)
-- 🧪 Evaluación de desempeño: `R²`, `RMSE`, `accuracy`, `precision`, `recall`, `F1-score`
-- 🔁 Validación cruzada 5-fold para regresión y clasificación
-- 🔁 Validación cruzada 10-fold para clasificación con exportación a CSV y LaTeX (`outputs/cv_clasificacion.*`)
-- 🎯 Selección de umbral óptimo para clasificación (basado en curva ROC)
-- 🧪 Análisis de robustez del umbral de pobreza educativa τ ∈ {0.70, 0.75, 0.78, 0.83} (`outputs/robustez_umbral.*`)
-- 📉 Regresión bivariada de NE sobre ANALFABET, con y sin controles, para analizar el efecto de supresión (`outputs/analfabet_biv.*`)
+NE is computed as the ratio between attained schooling and expected schooling
+of the household members. This metric captures **structural educational
+shortfalls** beyond the average educational level, accounting for the age
+composition of the household.
 
 ---
 
-## 📁 Estructura del proyecto
+## 📌 Objective
+
+Build regression and classification models to estimate the household
+educational level and to explore the relative importance of sociodemographic,
+structural and income-related variables.
+
+---
+
+## 🧮 Predictors
+
+Following the paper, the models use exactly **eight household predictors**
+plus **region fixed effects** (one-hot dummies for `REGION`, with one category
+as the reference):
+
+`HAC` · `INDICE_CARGA_COMPARTIDA` · `EDA` · `FEM` · `ANALFABET` ·
+`DESOCUP` · `INACTIVOS` · `IPCF`
+
+No other variable enters the models.
+
+---
+
+## ⚙️ Main features
+
+- ✅ Automatic download and validation of EPH datasets (`pyeph`)
+- 🧹 Cleaning and filtering of variables according to the valid ranges in the official documentation
+- 🧠 Computation of attained schooling (`EDA_ESC`), expected schooling (`EDA_ESP`) and the age-adjusted education index (`IEAE`)
+- 🏡 Aggregation of indicators at the household level (age, gender, illiteracy, employment, overcrowding, etc.)
+- 📈 Regression models: `Lasso`, `Ridge`, `ElasticNet`, `Random Forest`, `SVR`, `XGBoost`, `KNN`
+- 🧮 Binary classification of educational poverty (`PE = 1` if `NE < τ`, with `τ` = median of NE) using `Logistic Regression`, `RandomForestClassifier`, `SVM`, `XGBoostClassifier`, `KNN`
+- 📊 Visualisation: histograms, KDE plots, ROC and PR curves, correlation matrices (figures saved in English at 600 dpi)
+- 🔍 Interpretability with SHAP (regression and classification)
+- 🧪 Performance metrics: `R²`, `RMSE`, `MAE`, `accuracy`, `precision`, `recall`, `F1-score`, `AUC`, `AP`
+- 🔁 10-fold cross-validation on the full sample for both regression and classification
+- 🧪 Robustness analysis of the educational-poverty threshold τ ∈ {0.70, 0.75, 0.78, 0.83}
+- 📉 Bivariate regression of NE on ANALFABET, with and without controls (suppression effect)
+
+### Evaluation protocol
+
+To keep the manuscript consistent with the public code, the models use a
+**75/25 train/test split** (non-stratified), **10-fold cross-validation over
+the full sample** for model comparison, an **inner 5-fold CV** to tune the
+penalised linear methods (`LassoCV`, `RidgeCV`, `ElasticNetCV`), a **grid
+search** only for the Random Forest classifier, and a **fixed `k = 5`** for
+KNN. All models use the same `random_state` for replicability.
+
+---
+
+## 📁 Project structure
 
 ```text
 ├── scripts/
-│   └── notebook con el pipeline completo
+│   └── prediccion_nivel_educativo.ipynb   # full pipeline (Colab-ready)
 ├── outputs/
-│   └── resultados generados por el notebook: tablas (CSV y LaTeX),
-│       gráficos (PNG a 600 dpi) y bases procesadas (df_*.xlsx)
+│   └── all results generated by the notebook (see below)
 ├── document/
-│   ├── EPH_registro_4T2023.pdf                # Diccionario de variables
+│   ├── EPH_registro_4T2023.pdf             # variable dictionary
 │   ├── EPH_consideraciones_metodologicas_2t20.pdf
 │   ├── EPH_nota_metodologica_1_trim_2019.pdf
-│   └── Bases exportadas (df_*.xlsx)
+│   └── reference datasets (df_*.xlsx)
 ```
+
+### Contents of `outputs/`
+
+Generated automatically when the notebook is run:
+
+**Tables (LaTeX `.tex`, `booktabs`, English labels; CSV where applicable)**
+
+| File | Content |
+|------|---------|
+| `desempeño_regresion.tex` | Regression performance (R², RMSE, MAE), test set |
+| `cv_regresion.tex` | 10-fold CV of the regression models (mean ± sd) |
+| `desempeño_clasificacion.tex` | Classification performance at τ = 0.78 |
+| `cv_clasificacion.tex` / `.csv` | 10-fold CV of the classification models (mean ± sd) |
+| `robustez_umbral.tex` / `.csv` | Robustness across τ ∈ {0.70, 0.75, 0.78, 0.83} |
+| `auc_ap.tex` / `.csv` | AUC and average precision (AP) per classifier |
+| `logit_odds.tex` | Logit coefficients and odds ratios (top 10) |
+| `shap_regresion.tex` | Top 10 predictors by mean absolute SHAP (regression) |
+| `shap_clasificacion.tex` | Top 10 predictors by mean absolute SHAP (classification) |
+| `analfabet_biv.tex` / `.txt` | Bivariate OLS of NE on ANALFABET (suppression effect) |
+
+**Figures (PNG, 600 dpi, English labels)**
+
+`distribucion_NE_general.png`, `distribucion_NE_por_region.png`,
+`distribucion_NE_por_aglomerado.png`, `distribucion_NE_por_EDA.png`,
+`distribucion_NE_por_deciles_IPCF.png`, `curva_ROC_modelos.png`,
+`curva_PR_modelos.png`.
+
+**Processed datasets**
+
+`df_hogar_2024T4.xlsx`, `df_individual_2024T4.xlsx`,
+`df_modelo_estimaciones_2024T4.xlsx`.
 
 ---
 
 ## 🔁 Reproducibility
 
-El pipeline completo está en [`scripts/prediccion_nivel_educativo.ipynb`](scripts/prediccion_nivel_educativo.ipynb). Los datos de la EPH se descargan automáticamente con `pyeph`, por lo que no hace falta descargar nada a mano.
+The full pipeline lives in
+[`scripts/prediccion_nivel_educativo.ipynb`](scripts/prediccion_nivel_educativo.ipynb).
+The EPH data is downloaded automatically with `pyeph`, so nothing has to be
+downloaded by hand.
 
-### ▶️ Correr en Google Colab (recomendado)
+### ▶️ Run on Google Colab (recommended)
 
-1. Hacer clic en el badge [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/santiagoriverti/prediccion_nivel_educativo/blob/main/scripts/prediccion_nivel_educativo.ipynb) al inicio de este README.
-2. Ejecutar todas las celdas en orden (`Entorno de ejecución → Ejecutar todas`). La primera celda instala las dependencias que no vienen por defecto en Colab:
+1. Click the badge [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/santiagoriverti/prediccion_nivel_educativo/blob/main/scripts/prediccion_nivel_educativo.ipynb) at the top of this README.
+2. Run all cells in order (`Runtime → Run all`). The first cell installs the dependencies that are not available by default in Colab:
 
    ```python
    !pip install --quiet pyeph scikit-learn openpyxl shap xgboost statsmodels jinja2
    ```
 
-3. Todos los resultados — tablas (CSV y LaTeX), gráficos (PNG a 600 dpi) y bases procesadas (xlsx) — quedan en la carpeta `outputs/` del entorno de Colab (panel lateral de archivos), desde donde se pueden descargar.
+3. All results — tables (CSV and LaTeX), figures (PNG at 600 dpi) and processed datasets (xlsx) — are written to the `outputs/` folder of the Colab environment (file panel on the left), from where they can be downloaded.
 
-### 💻 Correr en local
+### 💻 Run locally
 
-Requiere Python 3.10 o superior.
+Requires Python 3.10 or higher.
 
 ```bash
-# 1. Clonar el repositorio
+# 1. Clone the repository
 git clone https://github.com/santiagoriverti/prediccion_nivel_educativo.git
 cd prediccion_nivel_educativo
 
-# 2. (Opcional) Crear un entorno virtual
+# 2. (Optional) Create a virtual environment
 python -m venv .venv
 # Windows: .venv\Scripts\activate | Linux/Mac: source .venv/bin/activate
 
-# 3. Instalar dependencias
+# 3. Install dependencies
 pip install pyeph scikit-learn openpyxl shap xgboost statsmodels jinja2 pandas numpy matplotlib seaborn scipy jupyter
 
-# 4. Abrir el notebook
+# 4. Open the notebook
 jupyter notebook scripts/prediccion_nivel_educativo.ipynb
 ```
 
-Todos los resultados (tablas, gráficos y bases procesadas) se guardan en una carpeta `outputs/` creada en el directorio de trabajo desde el que se ejecuta el notebook.
+All results (tables, figures and processed datasets) are written to an
+`outputs/` folder created in the working directory from which the notebook is
+run.
 
+---
 
-## Instrucciones para el Repositorio
+## 🗂️ Git workflow
 
-### Clonar el Repositorio
-Abrir cmd
-
-cd C:... (completar con directorio local)
-
+```bash
+# Clone
 git clone https://github.com/santiagoriverti/prediccion_nivel_educativo.git
 
-### Actualizar repositorio local
-Abrir cmd 
-
-cd C:... (completar con direccion del repositorio local)
-
+# Update the local copy
 git pull
 
-### Actualizar repositorio remoto en rama principal
-Abrir cmd
-
-cd C:... (completar con direccion del repositorio local)
-
+# Publish changes to the main branch
 git status
-
 git add .
-
-git commit -m "comentario"
-
+git commit -m "your message"
 git push origin main
+```

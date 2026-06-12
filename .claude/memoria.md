@@ -1,7 +1,54 @@
 # Memoria del proyecto — prediccion_nivel_educativo
 
-Última actualización: 2026-06-10 (sesión de la tarde — notebook ejecutado
-completo con datos 2024T4; ver "Resultados de la ejecución completa" abajo)
+Última actualización: 2026-06-11 (README reescrito en inglés; historia git
+purgada de cualquier atribución de Claude; ver HANDOFF abajo).
+
+---
+
+## ⭐ ESTADO ACTUAL / HANDOFF (leer esto primero)
+
+**Qué es:** repo del paper/TFM sobre nivel educativo (NE) en hogares
+argentinos con datos EPH (INDEC) y ML. Repo público:
+https://github.com/santiagoriverti/prediccion_nivel_educativo (rama `main`).
+Notebook único: `scripts/prediccion_nivel_educativo.ipynb` (40 celdas,
+Colab-ready). Local: `C:\Users\sriverti\Desktop\INECO\Repositorios\prediccion_nivel_educativo`.
+
+**Estado del código (correcto y consistente):**
+- Modelos usan SOLO los 8 predictores del paper + efectos fijos de región
+  (REGION dummies, drop_first): HAC, INDICE_CARGA_COMPARTIDA, EDA, FEM,
+  ANALFABET, DESOCUP, INACTIVOS, IPCF. (Antes usaba ~98 → corregido.)
+- Protocolo: split 75/25 sin estratificar; CV 10-fold sobre muestra completa;
+  inner CV 5-fold para lineales; GridSearch solo en RF clf; k=5 fijo en KNN.
+- Todos los resultados se guardan en `outputs/`. Gráficos en inglés a 600 dpi.
+- 10 tablas .tex (booktabs, inglés) + csv; AUC/AP se exporta a `auc_ap.tex/csv`.
+
+**Valores de verificación (deterministas, datos 2024T4, n=15.906, τ=0.78):**
+- Regresión XGBoost: R² test = 0.3665 | CV 10-fold = 0.3490 ± 0.0284.
+- Clasif. XGBoost: Accuracy = 0.7053, F1 = 0.7069 (test).
+- AUC: XGB 0.7812 | RF 0.7706 | SVM 0.7544 | Logit 0.7307 | KNN 0.6980.
+- AP:  XGB 0.7765 | RF 0.7597 | SVM 0.7293 | Logit 0.7007 | KNN 0.6509.
+- **Logit OR de ANALFABET = 0.91** (reproduce el paper).
+
+**⚠️ Importante para continuar:** los `outputs/` commiteados son del commit
+`bc99842` (ANTES de pasar figuras a inglés y de agregar `auc_ap`). El CÓDIGO
+está adelantado respecto de esos outputs. Para tener los outputs finales
+(7 PNG en inglés + `auc_ap.tex/csv` + tablas), **el usuario debe re-ejecutar
+el notebook**; al ser determinista dará los valores de arriba. En las últimas
+sesiones se commiteó solo código + memoria (el usuario regenera los outputs).
+
+**Pendientes:** (1) redactar sección ANALFABET (narrativa de supresión por
+estructura etaria, OR=0.91, tabla `analfabet_biv.tex`: cruda nula p=0.17, con
+EDA+IPCF β=−0.13 p<0.001); (2) unificar comentarios "2023"/"2024" en el
+notebook; (3) opcional: robustez recalculando ANALFABET sin menores
+(CH06≥10) para confirmar el mecanismo de supresión.
+
+**Operativa:** push con `.claude/push.ps1` (git push directo falla por
+credencial vencida). Runner local en `.claude/_run_nb.py`. Commits SIEMPRE
+sin Co-Authored-By (config global ya puesta). Scripts de `.claude/`
+(push.ps1, _run_nb.py, run_log.txt) y `pyeph/` excluidos vía
+`.git/info/exclude`; `CLAUDE.md` y `.claude/memoria.md` SÍ versionados.
+
+---
 
 ## Qué es el proyecto
 
@@ -241,3 +288,20 @@ GitHub para integrarlas al artículo. OR de ANALFABET = 0.91 reproducido.
 Mañana se continúa con los pendientes listados arriba (redacción de la
 sección ANALFABET, unificar comentarios 2023/2024, posible robustez de
 ANALFABET sin menores).
+
+## Sesión 2026-06-11 (cierre): README en inglés + limpieza de atribución
+
+- **README reescrito 100% en inglés** (título, descripción, features,
+  protocolo de evaluación, estructura, tabla de contenidos de `outputs/`,
+  reproducibilidad Colab/local, workflow git). Documenta los 8 predictores,
+  el protocolo 75/25 + CV 10-fold + inner 5-fold + k=5, y lista las 10
+  tablas, 7 figuras y 3 xlsx de `outputs/`.
+- **Atribución de Claude eliminada por completo**: se verificó que los 57
+  commits están autorados por Santiago Riverti y que NINGUNA cuenta "Claude"
+  es colaboradora (los push usan el token propio del usuario). Quedaban dos
+  commits viejos con trailer `Co-Authored-By: Claude` SOLO en el backup
+  local de filter-branch (`refs/original/`, hashes 3370768/500ba33, ya
+  ausentes de GitHub); se borró el ref, se expiró el reflog y se hizo
+  `gc --prune=now`. Verificación final: `git log --all --grep=Co-Authored`
+  → vacío. No hay colaborador de GitHub que remover (Claude nunca lo fue).
+- Config global ya garantiza commits sin Co-Authored-By a futuro.
